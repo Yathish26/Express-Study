@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Name</title>
+</head>
+<body>
+    <h1>Add a Name</h1>
+    <form id="addForm">
+        <input type="text" id="name" placeholder="Enter name" required>
+        <button type="submit">Add</button>
+    </form>
+    <script>
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const response = await fetch('/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            if (response.ok) {
+                alert('Added successfully');
+                document.getElementById('name').value = '';
+            } else {
+                alert('Error adding');
+            }
+        });
+    </script>
+</body>
+</html>
